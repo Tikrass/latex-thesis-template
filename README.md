@@ -4,12 +4,12 @@ My template for my master thesis.
 # Build
 This should probably work:
 ```
-xelatex -synctex=1 -interaction=nonstopmode -output-directory=build %.tex
-makeglossaries -d build %
-xelatex -synctex=1 -interaction=nonstopmode -output-directory=build %.tex
-biber --output_directory build %
-xelatex -synctex=1 -interaction=nonstopmode -output-directory=build %.tex
-xelatex -synctex=1 -interaction=nonstopmode -output-directory=build %.tex
+xelatex -synctex=1 -interaction=nonstopmode -output-directory=build thesis.tex
+makeglossaries -d build "thesis"
+xelatex -synctex=1 -interaction=nonstopmode -output-directory=build thesis.tex
+biber --output_directory build "thesis"
+xelatex -synctex=1 -interaction=nonstopmode -output-directory=build thesis.tex
+xelatex -synctex=1 -interaction=nonstopmode -output-directory=build thesis.tex
 ```
 
 # Fonts
