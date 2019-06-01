@@ -1,0 +1,113 @@
+\usetikzlibrary{shapes, shapes.symbols, shapes.misc,
+			 arrows, arrows.meta,
+			 calc,
+			 backgrounds,
+			 positioning,
+			 shadows
+		 }
+\tikzset{
+	font={\sffamily\scriptsize},
+	h1/.style={minimum height=9mm},
+	h2/.style={minimum height=15mm},
+	h3/.style={minimum height=30mm},
+	w1/.style={minimum width=16mm, text width=16mm, inner xsep = 0mm},
+	w2/.style={minimum width=32mm, text width=32mm, inner xsep = 0mm},
+	w3/.style={minimum width=48mm, text width=48mm, inner xsep = 0mm},
+	ww2/.style={minimum width=33mm, text width=33mm, inner xsep = 0mm},
+	ww3/.style={minimum width=49mm, text width=49mm, inner xsep = 0mm},
+	ww4/.style={minimum width=65mm, text width=65mm, inner xsep = 0mm},
+	ww6/.style={minimum width=65mm, text width=97mm, inner xsep = 0mm},
+	www3/.style={minimum width=49mm, text width=49mm, inner xsep = 0mm},
+	www4/.style={minimum width=66mm, text width=66mm, inner xsep = 0mm},
+	www5/.style={minimum width=83mm, text width=83mm, inner xsep = 0mm},
+	www6/.style={minimum width=98mm, text width=98mm, inner xsep = 0mm},
+	semirect/.style n args={4}{
+		draw=none,
+		rectangle,
+		append after command={
+			\pgfextra{%
+				\pgfkeysgetvalue{/pgf/outer xsep}{\oxsep}
+				\pgfkeysgetvalue{/pgf/outer ysep}{\oysep}
+				\def\arg@one{#1}
+				\def\arg@two{#2}
+				\def\arg@three{#3}
+				\def\arg@four{#4}
+				\begin{pgfinterruptpath}
+					\ifx\\#1\\\else
+					\draw[draw,#1] ([xshift=-\oxsep,yshift=+\pgflinewidth]\tikzlastnode.south east) edge ([xshift=-\oxsep,yshift=0\ifx\arg@two\@empty-\pgflinewidth\fi]\tikzlastnode.north east);
+					\fi\ifx\\#2\\\else
+					\draw[draw,#2] ([xshift=-\pgflinewidth,yshift=-\oysep]\tikzlastnode.north east) edge ([xshift=0\ifx\arg@three\@empty+\pgflinewidth\fi,yshift=-\oysep]\tikzlastnode.north west);
+					\fi\ifx\\#3\\\else
+					\draw[draw,#3] ([xshift=\oxsep,yshift=0-\pgflinewidth]\tikzlastnode.north west) edge ([xshift=\oxsep,yshift=0\ifx\arg@four\@empty+\pgflinewidth\fi]\tikzlastnode.south west);
+					\fi\ifx\\#4\\\else
+					\draw[draw,#4] ([xshift=0+\pgflinewidth,yshift=\oysep]\tikzlastnode.south west) edge ([xshift=0\ifx\arg@one\@empty-\pgflinewidth\fi,yshift=\oysep]\tikzlastnode.south east);
+					\fi
+				\end{pgfinterruptpath}
+			}
+		}
+	},
+	every node/.style={align=center},
+	entity/.style={rectangle, draw=black, semithick, w1,align=center, fill=white},
+	process/.style={ellipse, draw=black, semithick, w1, h1,align=center, fill=white},
+	datastore/.style={semirect={}{draw=black, semithick}{}{draw=black, semithick}, w1,align=center},
+	dataflow/.style={-{latex}, thick},
+	ddataflow/.style={{latex}-{latex}, thick},
+	boundary/.style={dash pattern=on 5pt off 2pt, very thick,rounded corners},
+	% Architecture Elements
+	module/.style={rounded corners=10pt, draw=black, semithick, minimum height=20pt},
+	component/.style={rounded corners=5pt, draw=black, semithick, minimum height=10pt},
+	file/.style={draw, minimum height=3em, minimum width=2em, font=\ttfamily\scriptsize,
+		fill=white, 
+		double copy shadow={shadow xshift=3pt, 
+			shadow yshift=3pt, fill=white, draw}
+	},
+	files/.style={draw, minimum height=4em, minimum width=3em, font=\ttfamily\scriptsize,
+		fill=white, 
+		double copy shadow={shadow xshift=3pt, 
+			shadow yshift=3pt, fill=white, draw}
+		},
+	py/.style={fill=rwth-25, draw opacity=0, fill opacity=1},
+	mpc/.style={fill=grun-25, draw opacity=0, fill opacity=1},
+	mix/.style={fill=petrol-25, draw opacity=0, fill opacity=1},
+	new/.style={draw opacity=1, draw=black, fill opacity=1},
+	mod/.style={draw opacity=1, draw=black, fill opacity=1, dash pattern=on 5pt off 2pt},
+	% Thick arrows
+	thickarrow/.style={shorten >= 1mm,shorten <=1mm, draw=black-50, line width = 5mm},
+	rthickarrow/.style={-{LaTeX[width=10mm,length=5mm]}, thickarrow},
+	lthickarrow/.style={{LaTeX[width=10mm,length=5mm]}-, thickarrow},
+	rlthickarrow/.style={{LaTeX[width=10mm,length=5mm]}-{LaTeX[width=10mm,length=5mm]}, thickarrow},
+}
+
+\pgfplotscreateplotcyclelist{rwth color}{%
+	rwth-75,
+	rot-75,
+	grun-75,
+	petrol-75,
+	bordeaux-75,
+	maigrun-75,
+	turkis-75,
+	lila-75,
+	orange-75,
+	violett-75,
+	magenta-75,
+	yellow-75,
+	violett-75,
+	orange-75
+}
+
+
+\pgfplotscreateplotcyclelist{rwth}{%
+	rwth-75,every mark/.append style={fill=rwth},mark=*\\%
+	rot!80!white,every mark/.append style={fill=rot},mark=square*\\%
+	grun-75,every mark/.append style={fill=grunk},mark=otimes*\\%
+	black,mark=star\\%
+	rwth-75,every mark/.append style={fill=rwth},mark=diamond*\\%
+	rot!80!white,densely dashed,every mark/.append style={solid,fill=rot},mark=*\\%
+	grun-75,densely dashed,every mark/.append style={
+		solid,fill=grun},mark=square*\\%
+	black,densely dashed,every mark/.append style={solid,fill=black-75},mark=otimes*\\%
+	rwth-75,densely dashed,mark=star,every mark/.append style=solid\\%
+	rot-75,densely dashed,every mark/.append style={solid,fill=rot},mark=diamond*\\%
+}
+
+\pgfkeys{/pgf/number format/.cd,1000 sep={\,}}

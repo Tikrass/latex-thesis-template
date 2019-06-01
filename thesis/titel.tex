@@ -1,0 +1,42 @@
+\begin{titlingpage}
+	\newlength{\logoheight}	\setlength{\logoheight}{5cm}
+	\setlength{\droptitle}{-3em}
+	
+	\renewcommand{\maketitlehooka}{%
+		\begin{center}
+			{\Large Unglaublich Tolle Hochschule Stadt\par\noindent}
+			Lehrstuhl L, TeX-Systems\\
+			Prof. Dr. Max Mustermann\\
+			%\includegraphics[height=\logoheight]{PETs4DS.pdf}\glsadd{pets}\\ % Hier könnte man ein Logo einfügen.
+			\vspace*{2cm}
+			{\LARGE\scshape Master Thesis}
+			\vspace*{1.5em}
+		\end{center}
+	}
+	\pretitle{\begin{center}\bfseries\HUGE\color{rwth-75}}
+		\title{A paper about LaTeX}
+	\posttitle{\end{center}\vskip 4em}
+	
+	\preauthor{\begin{center}\Large}
+		\author{Erika Beispiel}
+	\postauthor{\end{center}\vskip 2em}
+	
+	\predate{\begin{center}\Large}
+	\date{June 19, 2018} % Abgabedatum
+	\postdate{\end{center}\vskip 2em}
+
+    \renewcommand{\maketitlehookd}{%
+    	\vfill
+    \centerfloat
+    \begin{tabular}{>{\sffamily\color{rwth}}r>{}l}
+    	Advisor			& Dr. Peter Meyer\\ % Betreuer
+    	\nth{1} Supervisor		& Prof. Dr. Max Mustermann\\ % Erstkorrektor
+    	\nth{2} Supervisor 		& Prof. Dr. Erika Mustermann\\ % Zweitkorrektor	
+    	
+    \end{tabular}
+	}
+	\calccentering{\unitlength}
+	\begin{adjustwidth*}{\unitlength}{-\unitlength}
+		\maketitle
+	\end{adjustwidth*}
+\end{titlingpage}

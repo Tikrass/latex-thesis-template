@@ -1,0 +1,31 @@
+\begin{tikzpicture}
+\coordinate (compiler) at (0,.5);
+
+\node [file] (mpc) at ($(compiler)+(-1.5,4)$) {*.mpc};
+\node [draw=none,below of=mpc] (lblmc) {Source};
+
+\draw [module] ($(compiler)$) rectangle +(4.6,8);
+\node [draw=none] (lblcompiler) at ($(compiler)+(2.25,-0.5)$) {Compiler\\\emph{Python}};
+
+\coordinate  (execenv) at ($(compiler)+(2,7.75)$) ;
+\node [anchor=north] (lblexecenv) at (execenv) {Execution Environment} ;
+
+\node [component,anchor=north,ww2] (pylib) at ($(lblexecenv.south)+(-0.05,0)$) {Python Library\\\textit{compiler instructions}} ;
+\node [component, anchor=north,ww2] (spdzlib) at ($(pylib.south)-(0,0.1)$) {SPDZ Library\\\textit{util instructions}} ;
+\node [component, anchor=north east, w1, minimum height=33pt] (branching) at ($(spdzlib.south)-(0.05,0.1)$) {Branching\\\textit{if, loops}\\\textit{threads}} ;
+\node [component, anchor=north west, w1, minimum height=33pt] (types) at ($(spdzlib.south)-(-0.05,0.1)$) {Types\\\textit{int, array},\\\textit{fix, float}} ;
+\node [component, anchor=north, w1] (regs) at ($(types.south)-(0,0.1)$) {Registers\\\textit{s, c}} ;
+\node [component, anchor=north, w1] (cisc) at ($(branching.south)-(0,0.1)$) {\acrshort{cisc}\\$\times, \div, <$} ;
+\node [component, anchor=north, w1] (risc) at ($(cisc.south)-(0,0.1)$) {\acrshort{risc}\\$+$, $-$,open,\\ input, jump};
+\node [process, anchor=north] (recording) at ($(risc.south east)-(-0.05,0.3)$) {Tape Recorder};
+
+\draw [dataflow] 	(mpc.north) to[out=90,in=180] (lblexecenv.west);
+\draw [rthickarrow, black-25]  ($(lblexecenv.north east)+(0.6,0)$) -- +(0,-6);
+
+\node [file] (bc) at ($(compiler)+(6,4)$) {*.bc\\*.sch};
+\node [draw=none,below of=bc] (lblbc) {Bytecode \& Schedules};
+
+\draw [dataflow] 	(recording.east) to[out=0, in=-90] (lblbc.south);
+
+
+\end{tikzpicture}

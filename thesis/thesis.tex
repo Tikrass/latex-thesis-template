@@ -1,0 +1,80 @@
+%
+% Template by Thibaud Kehler
+% <thibaud.kehler@rwth-aachen.de>
+% CC-by 4.0
+%
+
+%%%
+% Document Class
+\documentclass[11pt,a4paper,twoside,openright,final]{memoir}
+%
+%%%
+
+%Preamble
+\input{preamble}
+
+\begin{document}
+	%Abkürzungen	
+	
+	%% Anfangsteil
+	\frontmatter
+	
+	%% Titel Seite
+	\input{titel}	
+
+	%% Abstract
+	\cleardoublepage
+	\input{abstract}	
+	
+	%% Vorworte
+	\cleardoublepage
+	\input{preface}	
+	
+	\cleardoublepage
+	\tableofcontents
+	%% Hauptteil
+	\mainmatter
+	
+	% INTRODUCTION
+	\input{introduction}
+	
+	% Related Work
+	\input{relatedwork}
+	
+	% Main Part
+	\input{mainpart}
+		
+	% Evaluation
+	\input{evaluation}
+	
+	% Evaluation
+	\input{conclusion}
+	
+	%% Anhänge
+	\appendix
+	
+	% Documentation
+	\input{documentation}
+	
+	%% Endteil
+	\backmatter
+	\tightlists % Reduce spacing in list
+	
+	% Abkürzungsverzeichnis
+	\printglossary[style=longragged,type=acronym,title=Abbreviations, nogroupskip,nonumberlist, nopostdot]
+	\label{bm:abbreviations}
+	%% Literaturverzeichnis
+	%\nocite{*}
+	\printbibliography[title={References}]
+	% Bildzitate
+	\glsaddall[types=attribution]
+	\renewcommand*{\entryname}{Name}
+	\renewcommand*{\descriptionname}{Credit and Licence}
+	\renewcommand*{\pagelistname}{Page}
+	\printglossary[style=long3colheader,type=attribution,title=Attributions, nogroupskip]
+	
+	%Lizenz
+	\input{license}
+	
+
+\end{document}

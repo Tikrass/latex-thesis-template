@@ -1,0 +1,2 @@
+- Put all the litarature in literature.bib
+- Advice: use an organizer to manage the bibliografy (e.g. JabRef)

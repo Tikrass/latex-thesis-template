@@ -1,0 +1,512 @@
+
+
+
+%%%
+%Mathematik
+%
+\usepackage[]{amsmath} % Viele Mathematik-Sachen: Doku: /usr/share/doc/texmf/latex/amsmath/amsldoc.dvi.gz
+\PassOptionsToPackage{fleqn,leqno}{amsmath} % options must be passed this way, otherwise it does not work with glossaries
+%fleqn (=Gleichungen linksbündig platzieren) funktioniert nicht direkt. Es muss noch ein Patch gemacht werden:
+%\addtolength\mathindent{1em}%work-around ams-math problem with align and 9 -> 10. Does not work with glossaries, No visual changes.
+\usepackage{mathtools} %fixes bugs in AMS math
+%\usepackage{amsfonts}
+\usepackage{amssymb}
+%
+%for theorems, replacement for amsthm
+\usepackage[amsmath,hyperref]{ntheorem}
+\theorempreskipamount 2ex plus1ex minus0.5ex
+\theorempostskipamount 2ex plus1ex minus0.5ex
+\theoremstyle{break}
+\theoremheaderfont{\itshape} 
+\theorembodyfont{\upshape}
+\newtheorem{definition}{Definition}[section]
+
+
+%
+%%%
+
+
+
+
+%%%
+% Fonts and typesetting 
+\usepackage{mathspec}
+%\setmainfont[BoldFont={Source S Pro Semibold}, ItalicFont={Source Sans Pro Italic}, BoldItalicFont={Source Sans Pro Semibold Italic}]{Source Sans Pro}
+\setprimaryfont[
+	UprightFont={* Light},
+	BoldFont={* Semibold},
+	ItalicFont={* Light Italic},     %Requires additional installation of self-build OTFs, because not published yet. 
+	BoldItalicFont={* Semibold Italic} 
+	] 
+	{Source Serif Pro}
+\setallsansfonts[
+	UprightFont={* Light},
+	BoldFont={* Semibold},
+	ItalicFont={* Light Italic},
+	BoldItalicFont={* Semibold Italic},
+	Scale=MatchLowercase]
+	{Source Sans Pro}%
+%\setmainfont[BoldFont={Source Sans Pro Semibold}, ItalicFont={Source Sans Pro Italic}, BoldItalicFont={Source Sans Pro Semibold Italic}]{Source Sans Pro}[Scale=MatchLowercase]
+\setallmonofonts[
+	UprightFont={* Light},
+	BoldFont={* Semibold},
+	Scale=MatchLowercase]
+	{Source Code Pro}%
+
+\setmathfont(Greek)[
+	UprightFont={* Light},
+	BoldFont={* Semibold},
+	AutoFakeSlant=0.15
+	]
+{Source Serif Pro}	 
+
+
+\newfontfamily\dejavu{DejaVu Sans}[
+	UprightFont={*},
+	BoldFont={* Bold},
+	ItalicFont={* Oblique},
+	BoldItalicFont={* Bold Oblique},
+]
+
+% Fixing Kerning for Hat and Bar in Math mode
+\newcommand*{\xhat}[1]{#1\kern-0.33em\hat{\phantom{#1}}}
+\newcommand*{\xxhat}[1]{#1\kern-0.30em\hat{\phantom{#1}}}
+
+\newcommand*{\xbar}[1]{#1\kern-0.33em\bar{\phantom{#1}}}
+
+%\normalizevarforms 
+	        
+% Fix mathspec before amsmath bug
+% https://tex.stackexchange.com/questions/85696/what-causes-this-strange-interaction-between-glossaries-and-amsmath
+
+\makeatletter % undo the wrong changes made by mathspec
+\let\RequirePackage\original@RequirePackage
+\let\usepackage\RequirePackage
+\makeatother
+
+
+%
+%%%
+
+
+
+
+
+%%%
+% Memoir Class Page formatting
+%
+% Change line witdh to new font
+\setlxvchars \setxlvchars 
+% 5mm binding tollerance
+\setbinding{5mm} 
+\settypeblocksize{600pt}{1.1\lxvchars}{*}
+\setlrmargins{*}{*}{1.5}
+\setulmargins{4cm}{*}{*}
+\setheadfoot{2\onelineskip}{2\onelineskip}
+\setmarginnotes{17pt}{3.5cm}{\onelineskip}
+% Save changes
+\checkandfixthelayout
+% Headings and Page Style
+\pagestyle{ruled}
+\copypagestyle{chapter}{plain}
+\makeevenfoot{chapter}{\thepage}{}{}
+\makeoddfoot{chapter}{}{}{\thepage}
+%
+%%%
+
+
+%%%
+% Ortography
+\usepackage[ngerman,english]{babel}
+%
+%%%
+
+
+
+%%%
+% Itemize, Enumerate, Lists
+\firmlists
+%
+%%%
+
+
+
+%%%
+%Hyperref
+\usepackage{hyperref}
+\hypersetup{
+	pdftitle    = {Privacy-Preserving Collaborative Filtering with SPDZ},
+	pdfsubject  = {Master Thesis},
+	pdfauthor   = {Thibaud René Kehler, 321038},
+	pdfkeywords = {Privacy} {Recommender Systems} {Collaborative Filtering} {Secure Multiparty Computation} {SPDZ},
+	pdfcreator  = {XeLaTex},
+	hidelinks,
+}
+\urlstyle{sf}
+%
+%%%
+
+
+
+
+%%%
+% Superscripts for 1st, 2nd, 3rd, 4th
+\usepackage[super]{nth}
+%
+%%%
+
+
+
+
+
+%%%
+% Colors
+\usepackage{xcolor}
+\include{rwth-colors}
+%
+%%%
+
+
+
+
+%%%
+% Division Styles
+\colorlet{chaptercolor}{rwth-50}
+% helper macros
+\newcommand\numlifter[1]{\raisebox{-2cm}[0pt][0pt]{\smash{#1}}}
+\newcommand\numindent{\kern37pt}
+\newlength\chaptertitleboxheight
+\makechapterstyle{hansen}{
+	\renewcommand\printchaptername{\raggedleft}
+	\renewcommand\printchapternum{%
+		\begingroup%
+		\leavevmode%
+		\chapnumfont%
+		\strut%
+		\numlifter{\thechapter}%
+		\numindent%
+		\endgroup%
+	}
+	\renewcommand
+	*
+	{\printchapternonum}{%
+		\vphantom{\begingroup%
+			\leavevmode%
+			\chapnumfont%
+			\numlifter{\vphantom{9}}%
+			\numindent%
+			\endgroup}
+		\afterchapternum}
+	\setlength\midchapskip{0pt}
+	\setlength\beforechapskip{0.5\baselineskip}
+	\setlength{\afterchapskip}{3\baselineskip}
+	\renewcommand\chapnumfont{%
+		\fontsize{4cm}{0cm}%
+		\bfseries%
+		\sffamily%
+		\color{chaptercolor}%
+	}
+	\renewcommand\chaptitlefont{%
+		\normalfont%
+		\huge%
+		\bfseries%
+		\raggedleft%
+	}%
+	\settototalheight\chaptertitleboxheight{%
+		\parbox{\textwidth}{\chaptitlefont \strut bg\\bg\strut}}
+	\renewcommand\printchaptertitle[1]{%
+		\parbox[t][\chaptertitleboxheight][t]{\textwidth}{%
+			%\microtypesetup{protrusion=false}% add this if you use microtype
+			\chaptitlefont\strut ##1\strut}%
+	}
+}
+% Chapter Style
+\chapterstyle{hansen}
+% Section Style
+\setsecheadstyle{\Large\bfseries\color{rwth-75}\raggedright}
+% Subsection Style
+\setsubsecheadstyle{\large\itshape\raggedright}
+
+% Numbering
+\setsecnumdepth{subsection}
+\settocdepth{subsection}
+% Write "Section 1.2" instead of "§1.2"
+\renewcommand{\sectionrefname}{Section}
+\renewcommand{\Sref}[1]{\sectionrefname~\ref{#1}}
+
+% Command to remove a section from TOC
+\newcommand{\nocontentsline}[3]{}
+\newcommand{\tocless}[2]{{\let\addcontentsline=\nocontentsline#1{#2}}\noindent}
+% e.g. \tocless\section{Title}
+%
+%%%
+
+
+
+%%%
+% Table of Content Fonts
+%\renewcommand{\cftchapterfont}{\normalsize\normalfont}
+%\renewcommand{\cftchapterformatpnum}{\normalsize\normalfont}
+%
+%%%
+
+
+
+
+%%%
+% Bibliography
+\usepackage[natbib=true,%
+maxcitenames=2,%
+maxbibnames=9,%
+sortlocale=auto,%
+style=numeric-comp,%
+backend=biber,%
+doi=false,%
+isbn=false,%
+url=false,%
+eprint=true,%
+urldate=comp,%
+giveninits=true%
+]{biblatex}
+\addbibresource{../literatur/literatur.bib}
+%
+%%%
+
+
+
+
+
+
+%%%
+% Acronyms & Glossaries
+\usepackage[acronym,nomain,numberedsection]{glossaries}
+\usepackage{glossary-longragged} 
+\newglossary*{attribution}{Attributions}
+\input{acronyms}
+\input{attributions}
+\makeglossaries
+%
+%%%
+
+
+
+
+
+%%%
+% Grafikeinbindungen
+\usepackage{graphicx}
+% Relocate default path
+\graphicspath{{\getgraphicspath}}
+\newcommand{\getgraphicspath}{../figures/}
+%
+%%%
+
+
+
+%%%
+% Tikz
+\usepackage{tikz}
+\usepackage{pgfplots}
+\usepackage{pgfplotstable}
+\pgfplotsset{compat=newest}
+\input{../tikz/tikz-styles}
+%
+%%%
+
+%%%
+% SI Einheiten
+\usepackage[binary-units]{siunitx}
+\sisetup{
+detect-all, % select font from suroundings
+range-phrase = --,
+list-final-separator = {, },
+group-digits = integer,
+group-minimum-digits = 4
+}
+%
+%%%
+
+
+%%%
+% Floats General
+%
+% Float Barrier
+\setFloatBlockFor{section}
+% Subcaption font
+\subcaptionsize{\normalsize}
+\subcaptionlabelfont{\normalfont}
+\subcaptionfont{\normalfont}
+% Spacing
+\tightsubcaptions
+\setlength{\floatsep}{10pt}
+\setlength{\textfloatsep}{20pt}
+\setlength{\intextsep}{10pt}
+
+\captionstyle{}
+\changecaptionwidth
+\captionwidth{0.8\linewidth}
+\captionnamefont{\bfseries}
+%%%
+
+%%%
+% Figures
+\newsubfloat{figure}
+\setfloatadjustment{figure}{\centering}
+%
+%%%
+
+%%%
+% Table
+\setfloatadjustment{table}{\centering}
+%
+%%%
+
+%%%
+% Listings
+\usepackage{listings}
+
+\lstset{language=Python,
+	showstringspaces=false,
+	extendedchars=true,
+	basicstyle=\footnotesize\ttfamily,
+	commentstyle=\slshape,
+	stringstyle=\ttfamily, %Original: \rmfamily, damit werden die Strings im Quellcode hervorgehoben. Zusaetzlich evtl.: \scshape oder \rmfamily durch \ttfamily ersetzen. Dann sieht's aus, wie bei fancyvrb
+	breaklines=true,
+	breakatwhitespace=true,
+	columns=flexible,
+	aboveskip=\fboxsep, %deaktivieren, falls man lstlistings direkt als floating object benutzt (\begin{lstlisting}[float,...])
+	belowskip=\fboxsep, %deaktivieren, falls man lstlistings direkt als floating object benutzt (\begin{lstlisting}[float,...])
+	frame=single,
+	framesep=3\fboxsep,
+	framexbottommargin=0pt,
+	xleftmargin=3\fboxsep,
+	xrightmargin=3\fboxsep
+}
+
+\newcommand{\inlinelst}[2]{\colorbox{lightgray}{\lstinline[language=#1]$#2$}}
+\newcommand{\code}{\texttt}
+
+\newfloat[chapter]{fltlisting}{lst}{\lstlistingname}
+\newcommand{\lref}[1]{\lstlistingname~\ref{#1}}
+\newsubfloat{fltlisting}
+%\setfloatadjustment{fltlisting}{\loosesubcaptions}
+%
+%%%
+
+
+%%%
+% Algorithms
+\usepackage[noend]{algpseudocode}
+\newcommand{\algorithmname}{Algorithm}
+\newfloat[chapter]{algorithm}{alg}{\algorithmname}
+\newcommand{\aref}[1]{\algorithmname~\ref{#1}}
+%\algrenewcommand\textproc{\texttt}
+%
+%%%
+
+%%%
+% Protocols
+\newcommand{\protocolname}{Protocol}
+\newfloat[chapter]{protocol}{prot}{\protocolname}
+\newcommand{\prref}[1]{\protocolname~\ref{#1}}
+%
+%%%
+
+
+%%%%
+% Tables
+\DisemulatePackage{tabularx}
+\usepackage{multirow,tabu,booktabs}
+\tabulinesep = 0pt
+%
+%%%
+
+%%%
+% Counters
+\letcountercounter{table}{figure}
+\letcountercounter{protocol}{figure}
+\letcountercounter{algorithm}{figure}
+\letcountercounter{fltlisting}{figure}
+%
+%%%
+
+%%%
+% Narrow Framed Boxes
+\newenvironment{nframed}{% % uses default \FrameCommand
+	\setlength{\topsep}{0pt}%
+	\MakeFramed{\advance\hsize -\width \FrameRestore}}%
+{\endMakeFramed}
+% Color leftbar
+\renewenvironment{leftbar}{%
+	\def\FrameCommand{{\color{rwth-75}\vrule width 3pt} \hspace{10pt}}%
+	\MakeFramed{\advance\hsize -\width \FrameRestore}}%
+{\endMakeFramed}
+%
+%%%
+
+
+%%% 
+% Quotes
+% Zitate in \enquote{...} setzen, dann werden automatisch die richtigen Anführungszeichen verwendet.
+\usepackage{csquotes}
+%
+%%%
+
+%%% 
+% Center enumerations
+\usepackage{varwidth}
+%
+%%%
+
+
+
+%%%
+% Abbreviations
+\usepackage{xspace}
+\newcommand*{\eg}[0]{e.g.\@\xspace}
+\newcommand*{\ie}[0]{i.e.\@\xspace}
+\newcommand*{\wrt}[0]{w.r.t.\@\xspace}
+\newcommand*{\cf}[0]{c.f.\@\xspace}
+
+\makeatletter
+\newcommand*{\etc}{%
+	\@ifnextchar{.}%
+	{etc}%
+	{etc.\@\xspace}%
+}
+\makeatother
+%%%
+
+
+
+
+%%%
+% Util Macros
+
+% Curly braces {}
+\DeclarePairedDelimiter\set\{\}
+% Angle brackets < >
+\DeclarePairedDelimiter\sv\langle\rangle
+%Shared values
+\newcommand{\svf}[2][]{\sv[#1]{#2}_f\,}
+\newcommand{\svp}[1]{\sv{#1}_\text{plain}}
+\newcommand{\svs}[1]{\sv{#1}_\text{sparse}}
+\newcommand{\svu}[1]{\sv{#1}_\text{user}}
+\newcommand{\svi}[1]{\sv{#1}_\text{item}}
+
+%%%
+
+%%%
+% TEMP 
+
+% TODO remove for thesis
+% just for dummy text
+\usepackage{lipsum}
+
+%schoene TODOs
+%\usepackage{todonotes}
+%\newcommand{\xtodo}[1]{\todo[color=black!7]{#1}\xspace}
+%\newcommand{\itodo}[2][]{\todo[inline,color=green!5,#1]{#2}}
+%\newcommand{\ctodo}[2][]{\todo[inline,color=red!5,#1]{#2}}
+%
+%%%
