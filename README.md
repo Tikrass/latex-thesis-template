@@ -11,6 +11,8 @@ biber --output_directory build "thesis"
 xelatex -synctex=1 -interaction=nonstopmode -output-directory=build thesis.tex
 xelatex -synctex=1 -interaction=nonstopmode -output-directory=build thesis.tex
 ```
+# Example
+If you are interested, on how to use the packages, you can find the sources of my master thesis in `example.zip`. 
 
 # Fonts
 Adobe Open Source Font Family:
