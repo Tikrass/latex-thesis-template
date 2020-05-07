@@ -5,6 +5,7 @@ My template for my master thesis.
 This should probably work:
 ```
 cd thesis
+mkdir build
 xelatex -synctex=1 -interaction=nonstopmode -output-directory=build thesis.tex
 makeglossaries -d build "thesis"
 xelatex -synctex=1 -interaction=nonstopmode -output-directory=build thesis.tex
